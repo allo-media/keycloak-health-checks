@@ -42,8 +42,17 @@ jobs:
           path: info
 
   build:
+    needs: [ release ]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/download-artifact@v1
+        with:
+          name: info
+      - name: Set upload_url
+        id: upload_info
+        run: |
+          upload_url=$(cat info/upload_url)
+          echo "upload_url=$upload_url" >> $GITHUB_OUTPUT
       - name: Checkout
         uses: actions/checkout@v3
       - name: Set up JDK 17
