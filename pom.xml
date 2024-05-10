@@ -6,7 +6,7 @@
 
     <groupId>com.github.thomasdarimont.keycloak</groupId>
     <artifactId>keycloak-health-checks</artifactId>
-    <version>23.0.7.0</version>
+    <version>23.0.7.1</version>
 
     <properties>
         <!-- general settings -->
