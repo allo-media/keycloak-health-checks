@@ -2,7 +2,6 @@ package com.github.thomasdarimont.keycloak.healthchecker.spi.database;
 
 import com.github.thomasdarimont.keycloak.healthchecker.model.HealthStatus;
 import com.github.thomasdarimont.keycloak.healthchecker.spi.AbstractHealthIndicator;
-import com.github.thomasdarimont.keycloak.healthchecker.support.KeycloakUtil;
 import lombok.extern.jbosslog.JBossLog;
 import org.keycloak.Config;
 import org.keycloak.models.KeycloakSession;
@@ -49,12 +48,7 @@ public class DatabaseHealthIndicator extends AbstractHealthIndicator {
     }
 
     protected DataSource lookupDataSource() throws Exception {
-        if (KeycloakUtil.isRunningOnKeycloak()) {
-            return (DataSource) new InitialContext().lookup(jndiName);
-        }
-
-        // Manual lookup via CDI for Keycloak.X
-        return CDI.current().select(DataSource.class).get();
+        return (DataSource) new InitialContext().lookup(jndiName);
     }
 
     protected boolean isDatabaseReady(DataSource dataSource, String healthQuery) throws Exception {
