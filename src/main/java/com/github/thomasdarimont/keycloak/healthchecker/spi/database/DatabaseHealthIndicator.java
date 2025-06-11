@@ -48,7 +48,8 @@ public class DatabaseHealthIndicator extends AbstractHealthIndicator {
     }
 
     protected DataSource lookupDataSource() throws Exception {
-        return (DataSource) new InitialContext().lookup(jndiName);
+        // Manual lookup via CDI for Quarkus Keycloak
+        return CDI.current().select(DataSource.class).get();
     }
 
     protected boolean isDatabaseReady(DataSource dataSource, String healthQuery) throws Exception {
