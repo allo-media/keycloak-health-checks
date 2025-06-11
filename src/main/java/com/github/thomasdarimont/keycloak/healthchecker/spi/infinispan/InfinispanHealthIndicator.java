@@ -9,6 +9,7 @@ import org.infinispan.health.ClusterHealth;
 import org.infinispan.health.Health;
 import org.infinispan.manager.EmbeddedCacheManager;
 import org.keycloak.Config;
+import org.keycloak.quarkus.runtime.storage.legacy.infinispan.CacheManagerFactory;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -62,13 +63,8 @@ public class InfinispanHealthIndicator extends AbstractHealthIndicator {
 
     protected EmbeddedCacheManager lookupCacheManager() {
 
-        try {
-            Object cacheManager = new InitialContext().lookup(jndiName);
-            return (EmbeddedCacheManager) cacheManager;
-        } catch (NamingException e) {
-            log.warnv("Could not find EmbeddedCacheManager with name: {0}", jndiName);
-            throw new RuntimeException(e);
-        }
+        // Manual lookup via Arc for Quarkus Keycloak
+        return Arc.container().instance(CacheManagerFactory.class).get().getOrCreateEmbeddedCacheManager();
     }
 
     protected KeycloakHealthStatus determineClusterHealth(ClusterHealth clusterHealth) {

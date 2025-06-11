@@ -18,11 +18,11 @@
         <!-- dependency versions -->
         <lombok.version>1.18.24</lombok.version>
 
-        <keycloak.version>26.1.4</keycloak.version>
+        <keycloak.version>25.0.6</keycloak.version>
         <keycloak.versionedArtifactName>keycloak-${keycloak.version}</keycloak.versionedArtifactName>
-        <infinispan.version>14.0.25.Final</infinispan.version>
+        <infinispan.version>15.0.7.Final</infinispan.version>
         <cdi-api.version>2.0.2</cdi-api.version>
-        <quarkus.version>2.13.3.Final</quarkus.version>
+        <quarkus.version>3.8.5</quarkus.version>
     </properties>
 
     <dependencies>
@@ -141,15 +141,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <repositories>
-        <!-- for org.jboss.web:jbossweb -->
-        <repository>
-            <id>jboss</id>
-            <url>https://repository.jboss.org/nexus/content/groups/public/</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 </project>
